@@ -7,32 +7,48 @@ namespace Krunch
 {
     public class Program
     {
+
         static void Main(string[] args)
         {
+            //Declare the input file
             string inputFile = "input.txt";
 
+            //Check if the input file exists
             if (!File.Exists(inputFile))
             {
+                //If the input file does not exist, print a message and return
                 Console.WriteLine("Input file not found.");
                 return;
             }
 
+            //Open the input file
             using (StreamReader reader = new StreamReader(inputFile))
             {
+                //Loop until the end of the file is reached
                 while (!reader.EndOfStream)
                 {
+                    //Read a line from the file
                     string input = reader.ReadLine();
+                    //Call the Krunch function on the line
                     string output = Krunch(input);
+                    //Print the input and output
                     Console.WriteLine("Input : " + input);
                     Console.WriteLine("Output : " + output);
                     Console.WriteLine();
                 }
             }
+            //Print a message and wait for user input
             Console.WriteLine();
             Console.WriteLine("Press any key to exit");
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Removes vowels and repeated characters from a string and returns the krunched string.
+        /// </summary>
+        /// <returns>
+        /// The krunched string.
+        /// </returns>
         public static string Krunch(string input)
         {
             // Define vowels and punctuation to be removed
