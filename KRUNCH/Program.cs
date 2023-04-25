@@ -9,10 +9,28 @@ namespace Krunch
     {
         static void Main(string[] args)
         {
-            Console.Write("Enter a line of input: ");
-            string input = Console.ReadLine();
-            string krunched = Krunch(input);
-            Console.WriteLine("Krunched: " + krunched);
+            string inputFile = "input.txt";
+
+            if (!File.Exists(inputFile))
+            {
+                Console.WriteLine("Input file not found.");
+                return;
+            }
+
+            using (StreamReader reader = new StreamReader(inputFile))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string input = reader.ReadLine();
+                    string output = Krunch(input);
+                    Console.WriteLine("Input : " + input);
+                    Console.WriteLine("Output : " + output);
+                    Console.WriteLine();
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("Press any key to exit");
+            Console.ReadLine();
         }
 
         public static string Krunch(string input)
